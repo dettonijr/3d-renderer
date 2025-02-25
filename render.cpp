@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "Obj.h"
-#include <cmath>
 #include "Renderer.h"
 
 const float  PI_F=3.14159265358979f;
