@@ -79,24 +79,10 @@ int main() {
     d.map_window(w);      
     d.flush();;      
 
-    printf("Depth %d\n", DefaultDepth(d.ptr(), DefaultScreen(d.ptr())));
-
-    XSelectInput (d.ptr(), w.window,
-                  ExposureMask |
-                  StructureNotifyMask);
-
     Framebuffer& frame = w.get_framebuffer();
 
     XEvent ev;
     for(int i = 0; ; i++) {
-        while(XPending(d.ptr())) {
-            XNextEvent(d.ptr(), &ev);
-            if (ev.type == ConfigureNotify) {
-                XConfigureEvent xce = ev.xconfigure;
-                printf("Resizing %d %d\n", xce.width, xce.height);
-                w.resize(xce.width, xce.height);
-            }   
-        }
         update_grid();    
         draw_grid(frame);
         w.update();

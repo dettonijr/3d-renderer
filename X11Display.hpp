@@ -10,7 +10,7 @@ class X11Display {
 public:
     X11Display(const std::string& name);
     ~X11Display();
-
+  
     void map_window(X11Window& w);
     void flush();
    
@@ -18,7 +18,6 @@ public:
 
 protected:
     Display* display;
-
 };
 
 #endif
