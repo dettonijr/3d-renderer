@@ -1,5 +1,5 @@
 #include "Obj.h"
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 #include "Shader.h"
 #include <vector>
 
@@ -7,7 +7,7 @@ class World;  // Forward declaration
 
 class Renderer {
 public:
-    Renderer(Framebuffer& fb);
+    Renderer(X11Framebuffer& fb);
     ~Renderer();
 
     void set_light(Point<float> light_vec);
@@ -19,6 +19,6 @@ public:
     void draw_rect(int minx, int miny, int maxx, int maxy, Color& c);
 
 private:
-    Framebuffer& framebuffer;
+    X11Framebuffer& framebuffer;
     Point<float> light_vec;
 };

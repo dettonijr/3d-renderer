@@ -6,8 +6,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(X11 REQUIRED)
 
 include_directories(${X11_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
-add_library(X11Wrap X11Display.cpp X11Window.cpp Framebuffer.cpp Obj.cpp Color.cpp TGAFile.cpp Util.cpp Renderer.cpp World.cpp)
+file(GLOB LIB_SOURCES lib/*.cpp)
+add_library(X11Wrap ${LIB_SOURCES})
+
 add_executable(main main.cpp)
 add_executable(life life.cpp)
 add_executable(render render.cpp)

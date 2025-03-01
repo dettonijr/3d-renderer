@@ -6,7 +6,7 @@
 #define I2F(x) ((float)x+0.5)
 #define F2I(x) ((int)x)
 
-Renderer::Renderer(Framebuffer& fb) : framebuffer(fb) {
+Renderer::Renderer(X11Framebuffer& fb) : framebuffer(fb) {
 }
 
 Renderer::~Renderer() {

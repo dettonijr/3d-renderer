@@ -1,4 +1,4 @@
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 #include <stdlib.h>
 #include "X11Display.hpp"
 #include <string.h>
@@ -6,15 +6,15 @@
 #include <cstdlib>
 #include <limits>
 
-Framebuffer::Framebuffer(X11Display& display, int width, int height) : _dpy(display.ptr()), _image(NULL)  {
+X11Framebuffer::X11Framebuffer(X11Display& display, int width, int height) : _dpy(display.ptr()), _image(NULL)  {
     resize(width, height);
 }
 
-Framebuffer::~Framebuffer() {
+X11Framebuffer::~X11Framebuffer() {
     XFree(_image);
 }
 
-void Framebuffer::resize(int width, int height) {
+void X11Framebuffer::resize(int width, int height) {
     if (_width == width && _height == height) {
         printf("Same size. Do nothing\n");
         return;
@@ -32,19 +32,19 @@ void Framebuffer::resize(int width, int height) {
     clear_zbuffer();
 }
 
-std::vector<uint32_t>& Framebuffer::get_raw_buffer() {
+std::vector<uint32_t>& X11Framebuffer::get_raw_buffer() {
     return buf;
 }
 
-std::vector<float>& Framebuffer::get_zbuffer() {
+std::vector<float>& X11Framebuffer::get_zbuffer() {
     return zbuf;
 }
 
-void Framebuffer::clear_zbuffer() {
+void X11Framebuffer::clear_zbuffer() {
     std::fill(zbuf.begin(), zbuf.end(), std::numeric_limits<float>::max());
 }
 
-void Framebuffer::set_pixel(int x, int y, const Color& c) {
+void X11Framebuffer::set_pixel(int x, int y, const Color& c) {
     if (x < 0)
         return;
     else if (x > _width)
@@ -61,7 +61,7 @@ void Framebuffer::set_pixel(int x, int y, const Color& c) {
     buf[y*_width+x] = c.r << 16 | c.g << 8 | c.b;
 }
 
-void Framebuffer::fill(Color& c) {
+void X11Framebuffer::fill(Color& c) {
     for (int i = 0; i < _height; i++) {
         for (int j = 0; j < _width; j++) {
             buf[i*_width+j] = c.r << 16 | c.g << 8 | c.b;

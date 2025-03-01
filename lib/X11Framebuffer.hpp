@@ -1,5 +1,5 @@
-#ifndef __FRAMEBUFFER_HPP__
-#define __FRAMEBUFFER_HPP__
+#ifndef __X11FRAMEBUFFER_HPP__
+#define __X11FRAMEBUFFER_HPP__
 
 #include <X11/Xlib.h>
 #include <stdint.h>
@@ -8,10 +8,10 @@
 #include <vector>
 class X11Display;
 
-class Framebuffer {
+class X11Framebuffer {
 public:
-    Framebuffer(X11Display& display, int width, int height);
-    ~Framebuffer();
+    X11Framebuffer(X11Display& display, int width, int height);
+    ~X11Framebuffer();
 
     void resize(int width, int height);
     std::vector<uint32_t>& get_raw_buffer();

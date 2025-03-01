@@ -1,10 +1,10 @@
 #include "X11Display.hpp"
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 #include <unistd.h>
 #include <stdint.h>
 #include <stdio.h>
 
-void write_color_to_pixmap(Framebuffer& f, int width, int height, unsigned char offset) {
+void write_color_to_pixmap(X11Framebuffer& f, int width, int height, unsigned char offset) {
     auto& bitmap = f.get_raw_buffer();
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
@@ -21,7 +21,7 @@ int main() {
     d.map_window(w);      
     d.flush();;      
 
-    Framebuffer& frame = w.get_framebuffer();
+    X11Framebuffer& frame = w.get_framebuffer();
 
     unsigned char off = 0;
     clock_t start = clock();

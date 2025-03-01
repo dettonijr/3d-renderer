@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "X11Display.hpp"
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 #include <unistd.h>
 #include <stdio.h>
 #include "Obj.h"
@@ -18,7 +18,7 @@ int main() {
     printf("Depth %d\n", DefaultDepth(d.ptr(), DefaultScreen(d.ptr())));
 
     TGAFile tga("./body_diffuse.tga");
-    Framebuffer& frame = w.get_framebuffer();
+    X11Framebuffer& frame = w.get_framebuffer();
     Renderer r(frame);
     
     // Create world and add objects

@@ -3,7 +3,7 @@
 #include "Point.h"
 #include <vector>
 #include <array>
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 #include "TGAFile.hpp"
 
 class Obj final{

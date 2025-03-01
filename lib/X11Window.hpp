@@ -2,7 +2,7 @@
 #define __WINDOW_HPP__
 
 #include <X11/Xlib.h>
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 class X11Display;
 
 class X11Window {
@@ -14,7 +14,7 @@ public:
 
     static X11Window CreateSimpleWindow(X11Display* d, int width, int height);
 
-    Framebuffer& get_framebuffer() { return frame; }
+    X11Framebuffer& get_framebuffer() { return frame; }
 
     void resize(int width, int height);
 
@@ -23,7 +23,7 @@ public:
     GC gc;
     Window window;
     X11Display* display;
-    Framebuffer frame;
+    X11Framebuffer frame;
 };
 
 #endif

@@ -1,5 +1,5 @@
 #include "X11Display.hpp"
-#include "Framebuffer.hpp"
+#include "X11Framebuffer.hpp"
 #include "Renderer.h"
 #include "World.h"
 #include <unistd.h>
@@ -81,7 +81,7 @@ int main() {
     d.map_window(w);      
     d.flush();;      
 
-    Framebuffer& frame = w.get_framebuffer();
+    X11Framebuffer& frame = w.get_framebuffer();
     Renderer renderer(frame);
 
     XEvent ev;
