@@ -145,18 +145,6 @@ void Renderer::draw_triangle(const Point<float>& v0, const Point<float>& v1, con
     }
 }
 
-void Renderer::draw_triangle(const Point<int>& v0, const Point<int>& v1, const Point<int>& v2, const Color& c) {
-    // Implementation for integer points - probably not used much but keeping for compatibility
-    draw_triangle(Point<float>(v0.x, v0.y, v0.z), Point<float>(v1.x, v1.y, v1.z), Point<float>(v2.x, v2.y, v2.z), c);
-}
-
-void Renderer::draw_line(const Point<float>& p0, const Point<float>& p1, const Color& c) {
-    draw_line(Point<int>(p0.x,p0.y,p0.z), Point<int>(p1.x,p1.y,p1.z), c);
-}
-
-void Renderer::draw_line(const Point<int>& p0, const Point<int>& p1, const Color& c) {
-    draw_line(p0.x, p0.y, p1.x, p1.y, c);
-}
 
 void Renderer::draw_line(int x0, int y0, int x1, int y1, const Color& c) {
     int width = framebuffer.width();
