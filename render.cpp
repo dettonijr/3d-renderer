@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "Obj.h"
 #include "Renderer.h"
+#include "World.h"
 
 const float  PI_F=3.14159265358979f;
 
@@ -19,9 +20,13 @@ int main() {
     TGAFile tga("./body_diffuse.tga");
     Framebuffer& frame = w.get_framebuffer();
     Renderer r(frame);
+    
+    // Create world and add objects
+    World world;
     Obj o("./body.obj", tga);
     o.transform(Transform::rotX(PI_F));
-    r.add_obj(o);  
+    world.add_obj(o);
+    
     r.set_light(Point<float>(0,0,1));
 
     clock_t start = clock();
@@ -29,7 +34,7 @@ int main() {
         frame.fill(Color::Black);
 
         Transform transform = Transform::scale(300,300,300) * Transform::translate(1.,1.,0) * Transform::rotY(i*0.05);
-        r.render_all_objs(transform);
+        r.render_world(world, transform);
         w.update();
 
         int framesSample = 50;

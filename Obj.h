@@ -22,7 +22,7 @@ public:
 
     void transform(const Transform& f);
 
-    const std::vector<Vertex>& get_faces() {
+    const std::vector<Vertex>& get_faces() const {
         return faces;
     }
 

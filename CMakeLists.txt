@@ -7,7 +7,7 @@ find_package(X11 REQUIRED)
 
 include_directories(${X11_INCLUDE_DIR})
 
-add_library(X11Wrap X11Display.cpp X11Window.cpp Framebuffer.cpp Obj.cpp Color.cpp TGAFile.cpp Util.cpp Renderer.cpp)
+add_library(X11Wrap X11Display.cpp X11Window.cpp Framebuffer.cpp Obj.cpp Color.cpp TGAFile.cpp Util.cpp Renderer.cpp World.cpp)
 add_executable(main main.cpp)
 add_executable(life life.cpp)
 add_executable(render render.cpp)

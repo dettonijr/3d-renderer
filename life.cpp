@@ -1,6 +1,7 @@
 #include "X11Display.hpp"
 #include "Framebuffer.hpp"
 #include "Renderer.h"
+#include "World.h"
 #include <unistd.h>
 #include <stdint.h>
 #include <stdio.h>

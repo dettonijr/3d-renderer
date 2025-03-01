@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "World.h"
 #include "Util.h"
 #include <limits>
 
@@ -11,15 +12,11 @@ Renderer::Renderer(Framebuffer& fb) : framebuffer(fb) {
 Renderer::~Renderer() {
 }
 
-void Renderer::add_obj(Obj& o) {
-    objs.push_back(o);
-}
-
 void Renderer::set_light(Point<float> light_vec) {
     this->light_vec = light_vec;
 }
 
-void Renderer::render_all_objs(const Transform& t) {
+void Renderer::render_world(const World& world, const Transform& t) {
     // Get references to framebuffer properties
     int width = framebuffer.width();
     int height = framebuffer.height();
@@ -28,7 +25,8 @@ void Renderer::render_all_objs(const Transform& t) {
     // Clear the zbuffer at the beginning of rendering
     framebuffer.clear_zbuffer();
 
-    for (auto obj = objs.begin(); obj != objs.end(); ++obj) {
+    const std::vector<Obj>& objects = world.get_objects();
+    for (auto obj = objects.begin(); obj != objects.end(); ++obj) {
         auto& faces = obj->get_faces();
         for (int i = 0; i < faces.size(); i++) {
             auto face = faces[i];
