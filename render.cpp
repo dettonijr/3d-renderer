@@ -17,19 +17,19 @@ int main() {
     printf("Depth %d\n", DefaultDepth(d.ptr(), DefaultScreen(d.ptr())));
 
     TGAFile tga("./body_diffuse.tga");
-    Renderer r;
+    Framebuffer& frame = w.get_framebuffer();
+    Renderer r(frame);
     Obj o("./body.obj", tga);
     o.transform(Transform::rotX(PI_F));
     r.add_obj(o);  
     r.set_light(Point<float>(0,0,1));
-    Framebuffer& frame = w.get_framebuffer();
 
     clock_t start = clock();
     for(int i = 0; ; i++) {
         frame.fill(Color::Black);
 
         Transform transform = Transform::scale(300,300,300) * Transform::translate(1.,1.,0) * Transform::rotY(i*0.05);
-        r.render(frame, transform);
+        r.render_all_objs(transform);
         w.update();
 
         int framesSample = 50;

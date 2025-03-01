@@ -1,5 +1,6 @@
 #include "X11Display.hpp"
 #include "Framebuffer.hpp"
+#include "Renderer.h"
 #include <unistd.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -59,16 +60,16 @@ void update_grid() {
     }
 }
 
-void draw_grid(Framebuffer& f) {
+void draw_grid(Renderer& renderer) {
     int tilewidth = 30;
     int tileheight = 30;
 
     for(int i = 0; i < 14; i++) {
         for(int j = 0; j < 22; j++) {
             if(getstate(grid, i, j))
-                f.draw_rect(j*tilewidth, i*tileheight, j*tilewidth+tilewidth, i*tileheight+tileheight, Color::Red); 
+                renderer.draw_rect(j*tilewidth, i*tileheight, j*tilewidth+tilewidth, i*tileheight+tileheight, Color::Red); 
             else
-                f.draw_rect(j*tilewidth, i*tileheight, j*tilewidth+tilewidth, i*tileheight+tileheight, Color::Black); 
+                renderer.draw_rect(j*tilewidth, i*tileheight, j*tilewidth+tilewidth, i*tileheight+tileheight, Color::Black); 
         }
     }
 }
@@ -80,11 +81,12 @@ int main() {
     d.flush();;      
 
     Framebuffer& frame = w.get_framebuffer();
+    Renderer renderer(frame);
 
     XEvent ev;
     for(int i = 0; ; i++) {
         update_grid();    
-        draw_grid(frame);
+        draw_grid(renderer);
         w.update();
         usleep(300000);
     } 
